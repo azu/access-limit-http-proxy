@@ -3,15 +3,6 @@ const Thin = require('thin');
 const assert = require('assert');
 const proxy = new Thin();
 const countMap = new Map();
-const allowCountMap = new Map();
-const helpers = require("./helper");
-// but with few exclusions
-const port = 8081;
-const allowCount = 3;
-const targetURL = "http://example.com/";
-countMap.set(targetURL, 0);
-allowCountMap.set(targetURL, allowCount);
-
 /**
  * @typedef {Object} TargetInterface
  * @type {{predicate: ((count))}}
@@ -27,18 +18,21 @@ module.exports = function(targets, options = {}) {
     const intercept = function(req, res, next) {
         const requestURL = req.url.slice(1);
         if (!targets[requestURL]) {
-            req.pipe(res);
-            return
+            return void next();
         }
         const predicate = targets[requestURL].predicate;
         assert(typeof predicate === "function", "target should have predicate");
-        const currentCount = countMap.get(targetURL) || 0;
+        const currentCount = countMap.get(requestURL) || 0;
         const count = currentCount + 1;
         debug("requestURL:", requestURL, "count:", count);
-        countMap.set(targetURL, count);
+        countMap.set(requestURL, count);
         if (predicate(count)) {
             debug("redirect", requestURL);
             res.writeHead(302, {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Request-Method': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS, GET',
+                'Access-Control-Allow-Headers': '*',
                 Location: requestURL
             });
             res.end();

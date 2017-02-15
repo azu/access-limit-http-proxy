@@ -10,7 +10,26 @@ Install with [npm](https://www.npmjs.com/):
 
 ## Usage
 
-- [ ] Write usage instructions
+```js
+"use strict";
+const httpProxy = require("access-limit-http-proxy");
+const targets = {
+    "http://example.com": {
+        // condition allow to access or return 500
+        predicate(count){
+            return count >= 3;
+        }
+    }
+};
+// start proxy
+httpProxy(targets, {
+    port: 8989
+});
+```
+
+Use as Proxy
+
+> Use as Proxy like this: http://localhost:8989/http://example.com
 
 ## Changelog
 
