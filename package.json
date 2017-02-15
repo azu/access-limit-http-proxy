@@ -10,7 +10,7 @@
     "src/"
   ],
   "name": "access-limit-http-proxy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HTTP Proxy that add access limit to any URL.",
   "main": "lib/access-limit-http-proxy.js",
   "scripts": {
