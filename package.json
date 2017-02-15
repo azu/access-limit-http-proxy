@@ -43,9 +43,7 @@
     "power-assert": "^1.4.2"
   },
   "dependencies": {
-    "bluebird": "^3.4.7",
     "debug": "^2.6.1",
-    "pem": "^1.9.4",
     "thin": "^0.3.1"
   }
 }
