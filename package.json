@@ -1,0 +1,49 @@
+{
+  "directories": {
+    "test": "test"
+  },
+  "author": "azu",
+  "license": "MIT",
+  "files": [
+    "bin/",
+    "lib/",
+    "src/"
+  ],
+  "name": "access-limit-http-proxy",
+  "version": "1.0.1",
+  "description": "HTTP Proxy that add access limit to any URL.",
+  "main": "lib/access-limit-http-proxy.js",
+  "scripts": {
+    "test": "mocha test/",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "watch": "babel src --out-dir lib --watch --source-maps",
+    "prepublish": "npm run --if-present build"
+  },
+  "keywords": [
+    "http",
+    "proxy",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azu/access-limit-http-proxy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/azu/access-limit-http-proxy/issues"
+  },
+  "homepage": "https://github.com/azu/access-limit-http-proxy",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-jsdoc-to-assert": "^4.0.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "^6.23.0",
+    "cross-env": "^3.1.4",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2"
+  },
+  "dependencies": {
+    "debug": "^2.6.1",
+    "thin": "^0.3.1"
+  }
+}
